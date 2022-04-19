@@ -6,9 +6,10 @@ import java.util.List;
 
 public class ExpenseDaoImpl implements ExpenseDao{
 
-    @Override
-    public void addExpense(Expense expense) {
 
+    @Override
+    public boolean addExpense(Expense expense) {
+        return false;
     }
 
     @Override
@@ -17,28 +18,18 @@ public class ExpenseDaoImpl implements ExpenseDao{
     }
 
     @Override
-    public Expense getExpense(Integer expenseId) {
+    public Expense getExpenseById(int expenseId) {
         return null;
     }
 
     @Override
-    public void updateExpense(Expense expense) {
-
+    public boolean updateExpense(Expense expense) {
+        return false;
     }
 
     @Override
-    public void approveExpense(Integer expenseId) {
-
-    }
-
-    @Override
-    public void denyExpense(Integer expenseId) {
-
-    }
-
-    @Override
-    public void deleteExpense(Integer expenseId) {
-
+    public boolean deleteExpense(int expenseId) {
+        return false;
     }
 
     @Override
@@ -47,7 +38,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
     }
 
     @Override
-    public void addExpensesByEmployeeId(Expense espense, Integer employeeId) {
-
+    public boolean addExpenseByEmployeeId(Expense expense) {
+        return false;
     }
 }

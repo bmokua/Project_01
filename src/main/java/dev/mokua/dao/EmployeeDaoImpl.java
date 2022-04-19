@@ -6,9 +6,10 @@ import java.util.List;
 
 public class EmployeeDaoImpl implements EmployeeDao{
 
-    @Override
-    public void addEmployee(Employee employee) {
 
+    @Override
+    public boolean addEmployee(Employee employee) {
+        return false;
     }
 
     @Override
@@ -17,12 +18,17 @@ public class EmployeeDaoImpl implements EmployeeDao{
     }
 
     @Override
-    public Employee getEmployee() {
+    public Employee getEmployeeById(int employeeId) {
         return null;
     }
 
     @Override
-    public void updateEmployee(Employee employee) {
+    public boolean updateEmployee(Employee employee) {
+        return false;
+    }
 
+    @Override
+    public boolean deleteEmployeeById(int id) {
+        return false;
     }
 }

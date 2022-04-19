@@ -14,10 +14,10 @@ public class App {
         ExpenseService expenseService = new ExpenseServiceImpl();
         EmployeeService employeeService = new EmployeeServiceImpl();
 
-        Javalin javalinApp = Javalin.create();
+        Javalin jApp = Javalin.create();
 
         // POST /employees
-        javalinApp.post("/employees", context -> {
+        jApp.post("/employees", context -> {
 
             String body = context.body();
             Gson gson = new Gson();
@@ -31,7 +31,7 @@ public class App {
 
         });
 
-        javalinApp.start(7000);
+        jApp.start(7000);
 
     }
 }

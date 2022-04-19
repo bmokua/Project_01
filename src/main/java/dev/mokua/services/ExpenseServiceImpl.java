@@ -6,9 +6,10 @@ import java.util.List;
 
 public class ExpenseServiceImpl implements ExpenseService{
 
-    @Override
-    public void addExpense(Expense expense) {
 
+    @Override
+    public boolean addExpense(Expense expense) {
+        return false;
     }
 
     @Override
@@ -22,23 +23,23 @@ public class ExpenseServiceImpl implements ExpenseService{
     }
 
     @Override
-    public void updateExpense(Expense expense) {
-
+    public boolean updateExpense(Integer expense) {
+        return false;
     }
 
     @Override
-    public void approveExpense(Integer expenseId) {
-
+    public boolean approveExpense(Integer expenseId) {
+        return false;
     }
 
     @Override
-    public void denyExpense(Integer expenseId) {
-
+    public boolean denyExpense(Integer expenseId) {
+        return false;
     }
 
     @Override
-    public void deleteExpense(Integer expenseId) {
-
+    public boolean deleteExpense(Integer expenseId) {
+        return false;
     }
 
     @Override
@@ -47,7 +48,7 @@ public class ExpenseServiceImpl implements ExpenseService{
     }
 
     @Override
-    public void addExpenseByEmployeeId(Expense expense, Integer employeeId) {
-
+    public boolean addExpenseByEmployeeId(Expense expense) {
+        return false;
     }
 }

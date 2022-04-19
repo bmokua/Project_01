@@ -7,31 +7,26 @@ import java.util.List;
 public interface ExpenseDao {
 
     //POST expenses
-    void addExpense(Expense expense);
+    boolean addExpense(Expense expense);
 
     //GET the expenses with a status of pending
     List<Expense> getExpenseByStatus(String status);
 
     //GET /Expenses/12
-    Expense getExpense(Integer expenseId);
+    Expense getExpenseById(int expenseId);
 
     //PUT /Expenses/15
-    void updateExpense(Expense expense);
+    boolean updateExpense(Expense expense);
 
-    //PATCH /Expenses/20/Approve
-    void approveExpense(Integer expenseId);
-
-    //PATCH /Expense/20/Deny
-    void denyExpense(Integer expenseId);
 
     //DELETE/Expense/19
-    void deleteExpense(Integer expenseId);
+    boolean deleteExpense(int expenseId);
 
     //GET /Employees/120/Expenses
     List<Expense> getExpensesByEmployeeId(Integer employeeId);
 
     //POST /Employees/120/Expenses
-    void addExpensesByEmployeeId(Expense espense, Integer employeeId);
+    boolean addExpenseByEmployeeId(Expense expense);
 
 
 

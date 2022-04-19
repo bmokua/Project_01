@@ -6,9 +6,10 @@ import java.util.List;
 
 public class EmployeeServiceImpl implements EmployeeService{
 
-    @Override
-    public void addEmployee(Employee employee) {
 
+    @Override
+    public boolean addEmployee(Employee employee) {
+        return false;
     }
 
     @Override
@@ -17,17 +18,17 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public Employee getEmployee() {
+    public Employee getEmployeeById(int employeeId) {
         return null;
     }
 
     @Override
-    public void updateEmployee(Employee employee) {
-
+    public boolean updateEmployee(Employee employee) {
+        return false;
     }
 
     @Override
-    public void deleteEmployee(Integer employeeId) {
-
+    public boolean deleteEmployee(int employeeId) {
+        return false;
     }
 }

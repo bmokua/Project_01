@@ -7,15 +7,18 @@ import java.util.List;
 public interface EmployeeDao {
 
     //POSY /Employees
-    void addEmployee(Employee employee);
+    boolean addEmployee(Employee employee);
 
     //GET /Employees
     List<Employee> getEmployees();
 
     //GET Employees/120
-    Employee getEmployee();
+    Employee getEmployeeById(int employeeId);
 
     //PUT Employees/150
-    void updateEmployee(Employee employee);
+    boolean updateEmployee(Employee employee);
+
+    //DELETE /Employees/190
+    boolean deleteEmployeeById(int id);
 
 }
