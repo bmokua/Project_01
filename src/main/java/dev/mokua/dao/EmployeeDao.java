@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface EmployeeDao {
 
-    //POSY /Employees
+    //POST /Employees
     boolean addEmployee(Employee employee);
 
     //GET /Employees

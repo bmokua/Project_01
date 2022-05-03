@@ -9,27 +9,30 @@ public interface ExpenseService {
     //    POST /expenses
     boolean addExpense(Expense expense);
 
+    //GET all expenses
+    List<Expense> getExpenses();
+
     //    GET /expenses?status=pending
     List<Expense> getExpenseByStatus(String status);
 
     //    GET /expenses/12
-    Expense getExpense(Integer expenseId);
+    Expense getExpenseById(int expenseId);
 
     //    PUT /expenses/15
-    boolean updateExpense(Integer expense);
+    boolean updateExpense(Expense expense);
 
     //    PATCH /expenses/20/approve
-    boolean approveExpense(Integer expenseId);
+    boolean approveExpense(int expenseId);
 
     //    PATCH /expenses/20/deny
-    boolean denyExpense(Integer expenseId);
+    boolean denyExpense(int expenseId);
 
     //    DELETE/expenses/19
-    boolean deleteExpense(Integer expenseId);
+    boolean deleteExpense(int expenseId);
 
     //    GET /employees/120/expenses
-    List<Expense> getExpensesByEmployeeId(Integer employeeId);
+    List<Expense> getExpensesByEmployeeId(int employeeId);
 
     //    POST /employees/120/expenses
-    boolean addExpenseByEmployeeId(Expense expense);
+
 }

@@ -1,54 +1,73 @@
 package dev.mokua.services;
 
+import dev.mokua.dao.ExpenseDao;
+import dev.mokua.dao.ExpenseDaoImpl;
 import dev.mokua.entities.Expense;
+import dev.mokua.utilities.Statuses;
 
 import java.util.List;
 
 public class ExpenseServiceImpl implements ExpenseService{
 
+    public ExpenseDao expenseDao;
+
+    //Constructor for expenseDao
+    public ExpenseServiceImpl() {
+        expenseDao = new ExpenseDaoImpl();
+    }
 
     @Override
     public boolean addExpense(Expense expense) {
-        return false;
+        return this.expenseDao.addExpense(expense);
+    }
+
+    @Override
+    public List<Expense> getExpenses() {
+        return this.expenseDao.getExpenses();
     }
 
     @Override
     public List<Expense> getExpenseByStatus(String status) {
-        return null;
+        return this.expenseDao.getExpenseByStatus(status);
     }
 
     @Override
-    public Expense getExpense(Integer expenseId) {
-        return null;
+    public Expense getExpenseById(int expenseId) {
+        return this.expenseDao.getExpenseById(expenseId);
     }
 
     @Override
-    public boolean updateExpense(Integer expense) {
-        return false;
+    public boolean updateExpense(Expense expense) {
+        return this.expenseDao.updateExpense(expense);
+    }
+
+    //needs updating
+    @Override
+    public boolean approveExpense(int expenseId) {
+
+        Expense expense = this.expenseDao.getExpenseById(expenseId);
+        expense.setStatus(Statuses.approvedStatus);
+        return this.expenseDao.updateExpense(expense);
+    }
+
+    //needs updating
+    @Override
+    public boolean denyExpense(int expenseId) {
+
+        Expense expense = this.expenseDao.getExpenseById(expenseId);
+        expense.setStatus(Statuses.deniedStatus);
+        return this.expenseDao.updateExpense(expense);
+
     }
 
     @Override
-    public boolean approveExpense(Integer expenseId) {
-        return false;
+    public boolean deleteExpense(int expenseId) {
+        return this.expenseDao.deleteExpense(expenseId);
     }
 
     @Override
-    public boolean denyExpense(Integer expenseId) {
-        return false;
+    public List<Expense> getExpensesByEmployeeId(int employeeId) {
+        return this.expenseDao.getExpensesByEmployeeId(employeeId);
     }
 
-    @Override
-    public boolean deleteExpense(Integer expenseId) {
-        return false;
-    }
-
-    @Override
-    public List<Expense> getExpensesByEmployeeId(Integer employeeId) {
-        return null;
-    }
-
-    @Override
-    public boolean addExpenseByEmployeeId(Expense expense) {
-        return false;
-    }
 }

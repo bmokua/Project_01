@@ -19,5 +19,5 @@ public interface EmployeeService {
     boolean updateEmployee(Employee employee);
 
     //DELETE /Employees/190
-    boolean deleteEmployee(int employeeId);
+    boolean deleteEmployeeById(int employeeId);
 }

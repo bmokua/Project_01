@@ -3,23 +3,23 @@ package dev.mokua.entities;
 public class Employee {
 
     private int employeeId; //Employee id
-    private String userName;
-    private String passWord;
     private String firstName;
     private String lastName;
     private String email;
+    private long decisionDate;
+    private long requestDate;
 
     public Employee(){
 
     }
 
-    public Employee(int employeeId, String userName, String passWord, String firstName, String lastName, String email) {
+    public Employee(int employeeId, String firstName, String lastName, String email, long decisionDate, long requestDate) {
         this.employeeId = employeeId;
-        this.userName = userName;
-        this.passWord = passWord;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.decisionDate = decisionDate;
+        this.requestDate = requestDate;
     }
 
     public int getEmployeeId() {
@@ -28,22 +28,6 @@ public class Employee {
 
     public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassWord() {
-        return passWord;
-    }
-
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
     }
 
     public String getFirstName() {
@@ -70,15 +54,31 @@ public class Employee {
         this.email = email;
     }
 
+    public long getDecisionDate() {
+        return decisionDate;
+    }
+
+    public void setDecisionDate(long decisionDate) {
+        this.decisionDate = decisionDate;
+    }
+
+    public long getRequestDate() {
+        return requestDate;
+    }
+
+    public void setRequestDate(long requestDate) {
+        this.requestDate = requestDate;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
                 "employeeId=" + employeeId +
-                ", userName='" + userName + '\'' +
-                ", passWord='" + passWord + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
+                ", decisionDate=" + decisionDate +
+                ", requestDate=" + requestDate +
                 '}';
     }
 }
