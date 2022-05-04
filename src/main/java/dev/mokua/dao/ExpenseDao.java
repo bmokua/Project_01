@@ -8,7 +8,7 @@ import java.util.List;
 public interface ExpenseDao {
 
     //POST expenses
-    boolean addExpense(Expense expense);
+    Expense addExpense(Expense expense);
 
     //GET all expenses
     List<Expense> getExpenses();

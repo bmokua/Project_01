@@ -7,7 +7,7 @@ import java.util.List;
 public interface EmployeeService {
 
     //POST /Employees
-    boolean addEmployee(Employee employee);
+    Employee addEmployee(Employee employee);
 
     //GET /Employees
     List<Employee> getEmployees();

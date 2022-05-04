@@ -8,11 +8,9 @@ public class ConnectionUtil {
 
     public static Connection createConnection(){
         try{
-           //String secureConnection = System.getenv("DatabaseUrl");
-            Connection conn = DriverManager.getConnection( "jdbc:postgresql://mokua-db.cyvhnxmsrinx.us-east-1." +
-                    "rds.amazonaws.com/expense?user=postgres&password=moseti123");
-            //Connection conn = DriverManager.getConnection(secureConnection);
-            return conn;
+           String secureConnection = System.getenv("DATABASE_URL");
+           Connection conn = DriverManager.getConnection(secureConnection);
+           return conn;
         }catch (SQLException e){
             e.printStackTrace();
             return null;

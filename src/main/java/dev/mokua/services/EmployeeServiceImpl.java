@@ -17,7 +17,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 
     @Override
-    public boolean addEmployee(Employee employee) {
+    public Employee addEmployee(Employee employee) {
         return this.employeeDao.addEmployee(employee);
     }
 

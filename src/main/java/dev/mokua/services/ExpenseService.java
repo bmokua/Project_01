@@ -7,7 +7,7 @@ import java.util.List;
 public interface ExpenseService {
 
     //    POST /expenses
-    boolean addExpense(Expense expense);
+    Expense addExpense(Expense expense);
 
     //GET all expenses
     List<Expense> getExpenses();

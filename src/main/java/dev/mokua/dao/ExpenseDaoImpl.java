@@ -45,7 +45,8 @@ public class ExpenseDaoImpl implements ExpenseDao {
 
 
     public static final String delete_expense = "" +
-            "delete from expense where expense_id = ? \n";
+            "delete from expense where expense_id = ?" +
+            " and status = 'PENDING';\n";
 
     public static final String get_expense_by_employee_id = "" +
             "select expense_id, employee_id, amount, status, request_date, " +
@@ -54,8 +55,8 @@ public class ExpenseDaoImpl implements ExpenseDao {
 
     //Add expense by expense
     @Override
-    public boolean addExpense(Expense expense) {
-        boolean returnValue = false;
+    public Expense addExpense(Expense expense) {
+        Expense returnValue = new Expense();
 
         try {
             Connection conn = ConnectionUtil.createConnection();
@@ -69,7 +70,7 @@ public class ExpenseDaoImpl implements ExpenseDao {
             ResultSet rs = ps.getGeneratedKeys(); //ResultSet a virtual table of results
 
             if (rs.next()) {
-                returnValue = true;
+                returnValue = buildExpenseFromResultSet(rs);
             }
 
         } catch (SQLException e) {
@@ -165,10 +166,10 @@ public class ExpenseDaoImpl implements ExpenseDao {
             ps.setInt(3, expense.getExpenseId());
 
 
-            ps.execute();
-            ResultSet rs = ps.getGeneratedKeys();
+//            ps.execute();
+//            ResultSet rs = ps.getGeneratedKeys();
 
-            if (rs.next()) {
+            if (ps.executeUpdate() > 0) {
                 successUpdate = true;
             }
 
@@ -186,6 +187,7 @@ public class ExpenseDaoImpl implements ExpenseDao {
         try {
             Connection conn = ConnectionUtil.createConnection();
             PreparedStatement ps = conn.prepareStatement(approve_expense, Statement.RETURN_GENERATED_KEYS);
+
             ps.setString(1, approvedStatus);
             ps.setInt(2, expenseId);
 

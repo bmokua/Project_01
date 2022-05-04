@@ -3,7 +3,7 @@ import dev.mokua.dao.EmployeeDao;
 import dev.mokua.dao.EmployeeDaoImpl;
 import dev.mokua.entities.Employee;
 import org.junit.jupiter.api.*;
-import org.testng.annotations.Test;
+
 
 import java.util.List;
 
@@ -16,18 +16,18 @@ public class EmployeeDaoTests {
     @Order(1)
     void add_employee_test() {
         Employee brian = new Employee(0,"Brian", "Mokua", "bmokua@gmail.com", 0L, 0L);
-        boolean result = employeeDao.addEmployee(brian);
+        brian = employeeDao.addEmployee(brian);
         EmployeeDaoTests.testEmployee = brian;
-        Assertions.assertTrue(result);
+        Assertions.assertTrue(brian.getEmployeeId()!=0);
 
     }
 
     @Test
     @Order(2)
     void get_all_employees(){
-        Employee a = new Employee(0,"A","B", "C", 0L, 0L);
-        Employee b = new Employee(0,"A","B", "C",0L, 0L);
-        Employee c = new Employee(0,"A","B", "C",0L, 0L);
+        Employee a = new Employee(0,"Brenda","Taylor", "brendataylor@gmail.com", 0L, 0L);
+        Employee b = new Employee(0,"George","Handler", "goergehandler@gmail.com",0L, 0L);
+        Employee c = new Employee(0,"Adam","Gibson", "adamgibson@gmail.com",0L, 0L);
         employeeDao.addEmployee(a);
         employeeDao.addEmployee(b);
         employeeDao.addEmployee(c);
@@ -41,16 +41,16 @@ public class EmployeeDaoTests {
     @Order(3)
     void get_employee_by_employee_id(){
 
-        Employee retrievedEmployee = employeeDao.getEmployeeById(21);
+        Employee retrievedEmployee = employeeDao.getEmployeeById(testEmployee.getEmployeeId());
 
         System.out.println(retrievedEmployee);
-        Assertions.assertEquals(21, retrievedEmployee.getEmployeeId());
+        Assertions.assertEquals(testEmployee.getEmployeeId(), retrievedEmployee.getEmployeeId());
     }
 
     @Test
     @Order(4)
     void update_employee() {
-        Employee retrievedEmployee = employeeDao.getEmployeeById(21);
+        Employee retrievedEmployee = employeeDao.getEmployeeById(testEmployee.getEmployeeId());
         retrievedEmployee.setFirstName("Brian II");
         boolean result = employeeDao.updateEmployee(retrievedEmployee);
         Assertions.assertTrue(result);
@@ -60,7 +60,7 @@ public class EmployeeDaoTests {
     @Order(5)
     void delete_employee() {
 
-        boolean result = employeeDao.deleteEmployeeById(21);
+        boolean result = employeeDao.deleteEmployeeById(testEmployee.getEmployeeId());
         Assertions.assertTrue(result);
     }
 }

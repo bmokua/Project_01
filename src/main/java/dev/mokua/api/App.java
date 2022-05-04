@@ -8,6 +8,7 @@ import dev.mokua.services.EmployeeService;
 import dev.mokua.services.EmployeeServiceImpl;
 import dev.mokua.services.ExpenseService;
 import dev.mokua.services.ExpenseServiceImpl;
+import dev.mokua.utilities.Statuses;
 import io.javalin.Javalin;
 
 import java.util.List;
@@ -47,7 +48,7 @@ public class App {
             String response ="";
 
             Employee employee = gson.fromJson(body, Employee.class);
-            boolean successfulAdd = employeeService.addEmployee(employee);
+            boolean successfulAdd = employeeService.addEmployee(employee).getEmployeeId()!=0;
             if(successfulAdd){
                 context.status(201);
                 context.result("Added employee");
@@ -97,7 +98,7 @@ public class App {
             String body = context.body();
 
             String response = "";
-            int employeeId = Integer.valueOf(context.pathParam("id"));
+            //int employeeId = Integer.valueOf(context.pathParam("id"));
             Employee employee = gson.fromJson(body, Employee.class);
 
             boolean successfulUpdate = employeeService.updateEmployee(employee);
@@ -163,7 +164,7 @@ public class App {
 
             Expense expense = gson.fromJson(body, Expense.class);
 
-           boolean addedExpense =  expenseService.addExpense(expense);
+           boolean addedExpense =  expenseService.addExpense(expense).getExpenseId()!=0;
 
            if(addedExpense){
 
@@ -218,7 +219,7 @@ public class App {
                 context.status(201);
             } catch (ResourceNotFound e) {
                 context.status(404);
-                context.result("This expense" + expenseId+  "was not found");
+                context.result("This expense" + expenseId+  "was not found.");
             }
 
         });
@@ -236,10 +237,10 @@ public class App {
             boolean successfulUpdate = expenseService.updateExpense(expense);
             if(successfulUpdate){
                 context.status(201);
-                response = "Successful update";
+                response = "Successful update.";
             }else{
                 context.status(404);
-                response= "Update not successful";
+                response= "Update not successful.";
             }
 
             context.result(response);
@@ -252,14 +253,18 @@ public class App {
 
             try {
                 int expenseId = Integer.valueOf(context.pathParam("id"));
-                String body = context.body();
-                Expense expense = gson.fromJson(body, Expense.class);
-                expenseService.approveExpense(expenseId);
-                context.status(201);
-                context.result("Approved expense!!!");
+                Expense expense = expenseService.getExpenseById(expenseId);
+                if(expense.getStatus().equalsIgnoreCase("PENDING")) {
+                    expenseService.approveExpense(expenseId);
+                    context.status(201);
+                    context.result("Approved expense.");
+                }else{
+                    context.status(401);
+                    context.result("Cannot Update expense");
+                }
             }catch(Exception e){
                 context.status(404);
-                context.result("Expense not approved");
+                context.result("Expense not approved.");
             }
         });
 
@@ -271,24 +276,30 @@ public class App {
 
             try {
                 int expenseId = Integer.valueOf(context.pathParam("id"));
-                String body = context.body();
-                Expense expense = gson.fromJson(body, Expense.class);
-                expenseService.denyExpense(expenseId);
-                context.status(201);
-                context.result("Denied expense!!!");
+                Expense expense = expenseService.getExpenseById(expenseId);
+                if(expense.getStatus().equalsIgnoreCase("PENDING")) {
+                    expenseService.denyExpense(expenseId);
+                    context.status(201);
+                    context.result("Denied expense.");
+                }else {
+                    context.status(404);
+                    context.result("Cannot update expense");
+                }
             }catch(Exception e){
                 context.status(201);
-                context.result("Denied not approved");
+                context.result("Denied not approved.");
             }
         });
 
         //DELETE /expenses/19
         jApp.delete("/expenses/{id}",context -> {
 
+
             String response = "";
             int expenseId = Integer.valueOf(context.pathParam("id"));
 
-            boolean successfulUpdate = expenseService.deleteExpense(expenseId);
+           boolean successfulUpdate = expenseService.deleteExpense(expenseId);
+
             if(successfulUpdate){
                 context.status(201);
                 response = "Delete was successful";
@@ -322,7 +333,7 @@ public class App {
         });
 
 
-        jApp.start(6000);
+        jApp.start(5000);
 
     }
 }

@@ -16,13 +16,13 @@ public class EmployeeDaoImpl implements EmployeeDao{
             "select * from employee \n";
 
     public final String get_employee = "" +
-            "select employee_id, first_name, last_name, request_date, " +
-            "decision_date, email from employee\n" +
+            "select employee_id, first_name, last_name, email, request_date, " +
+            "decision_date from employee\n" +
             "where employee_id = ? \n";
 
     public final String update_employee = "" +
-            "update employee set first_name = ? , last_name = ? , decision_date = current_date\n " +
-            "where employee_id = ? \n ";
+            "update employee set first_name = ?, last_name = ?," +
+            " email = ? where employee_id = ?; \n";
 
     public final String delete_employee = "" +
             "delete from employee where employee_id = ?";
@@ -30,8 +30,8 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
 
     @Override
-    public boolean addEmployee(Employee employee) {
-        boolean returnValue = false;
+    public Employee addEmployee(Employee employee) {
+        Employee returnValue = new Employee();
         try{
             Connection conn = ConnectionUtil.createConnection();
             PreparedStatement ps = conn.prepareStatement(insert_employee, Statement.RETURN_GENERATED_KEYS);
@@ -44,7 +44,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
             ResultSet rs = ps.getGeneratedKeys(); //ResultSet a virtual table of results
 
             if(rs.next()) {
-                returnValue = true;
+                returnValue = buildEmployeeFromResultSet(rs);
             }
 
         } catch (SQLException e) {
@@ -107,12 +107,13 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
             ps.setString(1, employee.getFirstName());
             ps.setString(2, employee.getLastName());
-            ps.setInt(3, employee.getEmployeeId());
+            ps.setString(3, employee.getEmail());
+            ps.setInt(4, employee.getEmployeeId());
 
-            ps.execute();
-            ResultSet rs = ps.getGeneratedKeys();
+//            ps.execute();
+//            ResultSet rs = ps.getGeneratedKeys();
 
-            if(rs.next()){
+            if(ps.executeUpdate() > 0){
                 successUpdate=true;
             }
 
@@ -154,12 +155,14 @@ public class EmployeeDaoImpl implements EmployeeDao{
             Integer employeeId = rs.getInt("employee_id");
             String firstName = rs.getString("first_name");
             String lastName = rs.getString("last_name");
+            String email = rs.getString("email");
             long requestDate = rs.getTimestamp("request_date").getTime();
             long decisionDate = rs.getTimestamp("decision_date").getTime();
 
             employee.setEmployeeId(employeeId);
             employee.setFirstName(firstName);
             employee.setLastName(lastName);
+            employee.setEmail(email);
             employee.setRequestDate(requestDate);
             employee.setDecisionDate(decisionDate);
         }

@@ -17,7 +17,7 @@ public class ExpenseServiceImpl implements ExpenseService{
     }
 
     @Override
-    public boolean addExpense(Expense expense) {
+    public Expense addExpense(Expense expense) {
         return this.expenseDao.addExpense(expense);
     }
 
