@@ -6,20 +6,18 @@ public class Employee {
     private String firstName;
     private String lastName;
     private String email;
-    private long decisionDate;
-    private long requestDate;
+
 
     public Employee(){
 
     }
 
-    public Employee(int employeeId, String firstName, String lastName, String email, long decisionDate, long requestDate) {
+    public Employee(int employeeId, String firstName, String lastName, String email) {
         this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.decisionDate = decisionDate;
-        this.requestDate = requestDate;
+
     }
 
     public int getEmployeeId() {
@@ -54,22 +52,6 @@ public class Employee {
         this.email = email;
     }
 
-    public long getDecisionDate() {
-        return decisionDate;
-    }
-
-    public void setDecisionDate(long decisionDate) {
-        this.decisionDate = decisionDate;
-    }
-
-    public long getRequestDate() {
-        return requestDate;
-    }
-
-    public void setRequestDate(long requestDate) {
-        this.requestDate = requestDate;
-    }
-
     @Override
     public String toString() {
         return "Employee{" +
@@ -77,8 +59,6 @@ public class Employee {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", decisionDate=" + decisionDate +
-                ", requestDate=" + requestDate +
                 '}';
     }
 }

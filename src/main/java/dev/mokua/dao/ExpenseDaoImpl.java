@@ -14,34 +14,34 @@ public class ExpenseDaoImpl implements ExpenseDao {
 
     public static final String insert_expense = "" +
             "insert into expense(employee_id , amount, status, request_date, \n" +
-            "decision_date) values (?,?,?,current_date,current_date) \n";
+            "decision_date) values (?,?,?,current_timestamp, current_timestamp); \n";
 
     public static final String get_expenses = "" +
-            "select * from expense \n";
+            "select * from expense; \n";
 
     public static final String get_expense_by_status = "" +
-            "select expense_id, employee_id, amount, status, request_date, " +
-            "decision_date from expense where status = ? \n";
+            "select expense_id, employee_id, amount, status, request_date, \n" +
+            "decision_date from expense where status = ?; \n";
 
     public static final String get_expense_by_id = "" +
-            "select expense_id, employee_id, amount, status, request_date, " +
-            "decision_date from expense where expense_id = ? \n";
+            "select expense_id, employee_id, amount, status, request_date, \n" +
+            "decision_date from expense where expense_id = ?; \n";
 
     public static final String update_expense = "" +
             "update expense \n" +
             "set amount = ?, \n" +
             "status = ? \n" +
-            "where expense_id = ? \n";
+            "where expense_id = ?; \n";
 
     public static final String approve_expense = "" +
             "update expense set \n" +
             "status = ? \n" +
-            "where expense_id = ? \n";
+            "where expense_id = ?; \n";
 
     public static final String deny_expense = "" +
             "update expense set \n" +
-            "status = ? \n" +
-            "where expense_id = ? \n";
+            "status = ?  \n" +
+            "where expense_id = ?; \n";
 
 
     public static final String delete_expense = "" +
@@ -50,7 +50,7 @@ public class ExpenseDaoImpl implements ExpenseDao {
 
     public static final String get_expense_by_employee_id = "" +
             "select expense_id, employee_id, amount, status, request_date, " +
-            "decision_date from expense where employee_id = ? \n";
+            "decision_date from expense where employee_id = ?; \n";
 
 
     //Add expense by expense
@@ -184,6 +184,9 @@ public class ExpenseDaoImpl implements ExpenseDao {
     public boolean approveExpense(int expenseId) {
         boolean returnValue = false;
 
+        //Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+
         try {
             Connection conn = ConnectionUtil.createConnection();
             PreparedStatement ps = conn.prepareStatement(approve_expense, Statement.RETURN_GENERATED_KEYS);
@@ -195,7 +198,9 @@ public class ExpenseDaoImpl implements ExpenseDao {
 
             ResultSet rs = ps.getGeneratedKeys(); //ResultSet a virtual table of results
 
+
             if (rs.next()) {
+
                 returnValue = true;
             }
 

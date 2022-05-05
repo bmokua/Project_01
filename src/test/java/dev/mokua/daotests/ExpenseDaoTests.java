@@ -5,7 +5,9 @@ import dev.mokua.dao.ExpenseDaoImpl;
 import dev.mokua.entities.Employee;
 import dev.mokua.entities.Expense;
 import org.junit.jupiter.api.*;
+import dev.mokua.utilities.Statuses;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -14,11 +16,12 @@ public class ExpenseDaoTests {
     static ExpenseDao expenseDao = new ExpenseDaoImpl();
     static Expense testExpense = null;
 
+
     @Test
     @Order(1)
     void add_expense_test(){
 
-        Expense firstExpense = new Expense(1, 0, 500.00, 0,  "PENDING",0);
+        Expense firstExpense = new Expense(2, 0, 500.00, 0L,  "PENDING",0L);
         ExpenseDaoTests.testExpense = expenseDao.addExpense(firstExpense);
         Assertions.assertTrue(testExpense.getExpenseId()!=0);
 
@@ -27,9 +30,9 @@ public class ExpenseDaoTests {
     @Test
     @Order(2)
     void get_all_expenses(){
-        Expense firstExpense = new Expense(2, 0, 500.00, 0,  "PENDING",0);
-        Expense secondExpense = new Expense(1, 0, 500.00, 0,  "PENDING",0);
-        Expense thirdExpense = new Expense(3, 0, 500.00, 0,  "PENDING",0);
+        Expense firstExpense = new Expense(2, 0, 500.00, 0L,  "PENDING",0L);
+        Expense secondExpense = new Expense(4, 0, 500.00, 0L,  "PENDING",0L);
+        Expense thirdExpense = new Expense(3, 0, 500.00, 0L,  "PENDING",0L);
 
         expenseDao.addExpense(firstExpense);
         expenseDao.addExpense(secondExpense);
