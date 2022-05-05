@@ -11,6 +11,8 @@ import dev.mokua.services.ExpenseServiceImpl;
 import dev.mokua.utilities.Statuses;
 import io.javalin.Javalin;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,6 +32,9 @@ public class App {
 //        String secureConnection = System.getenv("DatabaseUrl");
 //        System.out.println(secureConnection);
 
+        Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
+
+        System.out.println(timeStamp);
 
         ExpenseService expenseService = new ExpenseServiceImpl();
         EmployeeService employeeService = new EmployeeServiceImpl();
@@ -195,18 +200,22 @@ public class App {
         // GET /expenses/status
         jApp.get("/expenses/status", context -> {
             Gson gson = new Gson();
-            try {
-                String status = String.valueOf(context.queryParam("status"));
 
-                List<Expense> expenseList = expenseService.getExpenseByStatus(status);
+            List<Expense> expenseList = new ArrayList<>();
+            String expenseStatus = context.queryParam("status");
+
+                if(expenseStatus != null){
+                    expenseList = expenseService.getExpenseByStatus(expenseStatus);
+
+                }else {
+                    expenseList = expenseService.getExpenses();
+                }
+
                 String response = gson.toJson(expenseList);
 
-                context.status(201);
-                context.result(response);
-            }catch(Exception e){
-                context.status(404);
-                context.result("Expenses not found");
-            }
+                    context.status(201);
+                    context.result(response);
+
         });
 
         //GET /expenses/12
@@ -333,7 +342,7 @@ public class App {
         });
 
 
-        jApp.start(5000);
+        jApp.start(6000);
 
     }
 }

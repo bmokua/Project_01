@@ -15,7 +15,7 @@ public class EmployeeDaoTests {
     @Test
     @Order(1)
     void add_employee_test() {
-        Employee brian = new Employee(0,"Brian", "Mokua", "bmokua@gmail.com", 0L, 0L);
+        Employee brian = new Employee(0,"Brian", "Mokua", "bmokua@gmail.com");
         brian = employeeDao.addEmployee(brian);
         EmployeeDaoTests.testEmployee = brian;
         Assertions.assertTrue(brian.getEmployeeId()!=0);
@@ -25,9 +25,9 @@ public class EmployeeDaoTests {
     @Test
     @Order(2)
     void get_all_employees(){
-        Employee a = new Employee(0,"Brenda","Taylor", "brendataylor@gmail.com", 0L, 0L);
-        Employee b = new Employee(0,"George","Handler", "goergehandler@gmail.com",0L, 0L);
-        Employee c = new Employee(0,"Adam","Gibson", "adamgibson@gmail.com",0L, 0L);
+        Employee a = new Employee(0,"Brenda","Taylor", "brendataylor@gmail.com");
+        Employee b = new Employee(0,"George","Handler", "goergehandler@gmail.com");
+        Employee c = new Employee(0,"Adam","Gibson", "adamgibson@gmail.com");
         employeeDao.addEmployee(a);
         employeeDao.addEmployee(b);
         employeeDao.addEmployee(c);

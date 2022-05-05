@@ -1,5 +1,7 @@
 package dev.mokua.utilities;
 
+import java.sql.Timestamp;
+
 public class Statuses {
 
     public static final String pendingStatus = "PENDING";

@@ -1,6 +1,7 @@
 package dev.mokua.entities;
 
-import java.util.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
 
 public class Expense {
 

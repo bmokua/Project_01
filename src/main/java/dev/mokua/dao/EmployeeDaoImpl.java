@@ -9,23 +9,21 @@ import java.util.List;
 
 public class EmployeeDaoImpl implements EmployeeDao{
     public final String insert_employee = "" +
-            "insert into employee(first_name, last_name, request_date, " +
-            "decision_date, email) values (?,?,current_date,current_date,?) \n";
+            "insert into employee(first_name, last_name, email) values (?,?,?); \n";
 
     public final String get_employees = "" +
-            "select * from employee \n";
+            "select * from employee; \n";
 
     public final String get_employee = "" +
-            "select employee_id, first_name, last_name, email, request_date, " +
-            "decision_date from employee\n" +
-            "where employee_id = ? \n";
+            "select employee_id, first_name, last_name, email from employee \n" +
+            "where employee_id = ?; \n";
 
     public final String update_employee = "" +
             "update employee set first_name = ?, last_name = ?," +
             " email = ? where employee_id = ?; \n";
 
     public final String delete_employee = "" +
-            "delete from employee where employee_id = ?";
+            "delete from employee where employee_id = ?; \n";
 
 
 
@@ -156,15 +154,11 @@ public class EmployeeDaoImpl implements EmployeeDao{
             String firstName = rs.getString("first_name");
             String lastName = rs.getString("last_name");
             String email = rs.getString("email");
-            long requestDate = rs.getTimestamp("request_date").getTime();
-            long decisionDate = rs.getTimestamp("decision_date").getTime();
 
             employee.setEmployeeId(employeeId);
             employee.setFirstName(firstName);
             employee.setLastName(lastName);
             employee.setEmail(email);
-            employee.setRequestDate(requestDate);
-            employee.setDecisionDate(decisionDate);
         }
         return employee;
     }
